@@ -1,38 +1,77 @@
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  padding: 20px;
+  color: #222;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #fff;
+  background-attachment: fixed;
+  position: relative;
+}
+
+body {
+  background: #fff;
+  min-height: 100vh;
+}
+
+/* Textura sutil tipo galería */
+
+
+
+.portfolio-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+
+
+.media-card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  width: 420px;
+  color: #eee;
+  overflow: visible;
+  margin-bottom: 32px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  transition: none;
 }
 
-.App-link {
-  color: #61dafb;
+.media-card:hover {
+  box-shadow: none;
+  transform: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+.media-card img,
+.media-card video {
+  width: 100%;
+  height: 420px;
+  object-fit: contain;
+  background: #000;
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 18px;
+  display: block;
+  border: none;
+}
+
+
+.media-card h3 {
+  display: none;
+}
+
+
+.media-card p {
+  display: none;
 }
