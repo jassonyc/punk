@@ -99,15 +99,12 @@ export default function Gallery() {
       </div>
       <div
         style={{
-          width: '100vw',
-          height: '100vh',
+          flex: 1,
+          width: '100%',
+          height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          zIndex: 1,
           background: '#000',
         }}
       >
@@ -117,8 +114,6 @@ export default function Gallery() {
           style={{
             maxWidth: '100vw',
             maxHeight: '100vh',
-            width: 'auto',
-            height: 'auto',
             objectFit: 'contain',
             objectPosition: 'center',
             userSelect: 'none',
@@ -126,6 +121,7 @@ export default function Gallery() {
             transition: 'transform 0.5s cubic-bezier(.4,0,.2,1)',
             display: 'block',
             margin: 'auto',
+            background: '#000',
           }}
           draggable={false}
         />
