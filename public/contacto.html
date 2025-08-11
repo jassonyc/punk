@@ -7,13 +7,57 @@
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700&display=swap" rel="stylesheet">
   <style>
     .contact-img {
-      width: 100%;
-      max-width: 420px;
-      border-radius: 12px;
-      margin-bottom: 2.2rem;
-      box-shadow: 0 4px 32px #000a;
+      width: 100vw;
+      height: 100vh;
+      max-width: 100vw;
+      max-height: 100vh;
       object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      margin: 0;
+      border-radius: 0;
+      box-shadow: none;
       display: block;
+      filter: brightness(0.7);
+    }
+    .contact-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      background: rgba(17,17,17,0.18);
+    }
+    .contact-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.2rem;
+      text-transform: uppercase;
+      text-shadow: 0 2px 12px #000;
+      color: #fff;
+      background: rgba(0,0,0,0.32);
+      padding: 0.5em 1.5em;
+      border-radius: 10px;
+    }
+    .contact-content {
+      font-size: 1.25rem;
+      line-height: 1.7;
+      text-align: center;
+      max-width: 480px;
+      margin: 0 auto 2.2rem auto;
+      color: #fff;
+      background: rgba(0,0,0,0.32);
+      padding: 1.2em 2em;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px #000a;
     }
     html, body {
       background: #111;
@@ -76,12 +120,14 @@
 </head>
 <body>
   <img class="contact-img" src="/images/_DSC6109 copy.jpeg" alt="servicio de serigrafía, diseño y fotografía colectivo" />
-  <div class="contact-title">CONTACTO</div>
-  <div class="contact-content">
-    Serigrafía | Diseño | Fotografía<br>
-    Colectivo creativo<br><br>
-    📧 <a class="contact-email" href="mailto:jassonjfer9@gmail.com">jassonjfer9@gmail.com</a>
+  <div class="contact-overlay">
+    <div class="contact-title">CONTACTO</div>
+    <div class="contact-content">
+      Serigrafía | Diseño | Fotografía<br>
+      Colectivo creativo<br><br>
+      📧 <a class="contact-email" href="mailto:jassonjfer9@gmail.com">jassonjfer9@gmail.com</a>
+    </div>
+    <a class="back-link" href="/">Volver a la galería</a>
   </div>
-  <a class="back-link" href="/">Volver a la galería</a>
 </body>
 </html>
