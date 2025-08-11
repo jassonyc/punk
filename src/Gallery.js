@@ -115,10 +115,10 @@ export default function Gallery() {
           src={mediaItems[current].url}
           alt=""
           style={{
-            width: '100%',
-            height: '100%',
             maxWidth: '100vw',
             maxHeight: '100vh',
+            width: 'auto',
+            height: 'auto',
             objectFit: 'contain',
             objectPosition: 'center',
             userSelect: 'none',
@@ -126,7 +126,6 @@ export default function Gallery() {
             transition: 'transform 0.5s cubic-bezier(.4,0,.2,1)',
             display: 'block',
             margin: 'auto',
-            background: '#000',
           }}
           draggable={false}
         />
