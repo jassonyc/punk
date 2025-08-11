@@ -1,3 +1,5 @@
+  // ...existing code...
+
 
 import React, { useState, useRef, useEffect } from 'react';
 import { mediaItems } from './data/mediaItems';
@@ -52,70 +54,72 @@ export default function Gallery() {
   }, []);
 
   return (
-    <div
-      ref={mainRef}
-      style={{
-        width: '100vw',
-        height: '100vh',
-        minHeight: 0,
-        minWidth: 0,
-        background: '#111',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        margin: 0,
-        padding: 0,
-        position: 'fixed',
-        inset: 0,
-        zIndex: 0,
-        touchAction: 'pan-y',
-      }}
-      tabIndex={0}
-    >
-      <div style={{
-        position: 'absolute',
-        top: 32,
-        left: 0,
-        width: '100%',
-        textAlign: 'center',
-        zIndex: 2,
-        pointerEvents: 'none',
-      }}>
-        <span style={{
-          fontFamily: 'Playfair Display, serif',
-          fontWeight: 700,
-          fontSize: '2.7rem',
-          color: '#fff',
-          letterSpacing: '0.12em',
-          textTransform: 'uppercase',
-          textShadow: '0 2px 12px #000',
-          lineHeight: 1.1,
-          userSelect: 'none',
-        }}>
-          NYC
-        </span>
-      </div>
-      <img
-        src={mediaItems[current].url}
-        alt=""
+    <>
+      <div
+        ref={mainRef}
         style={{
-          maxWidth: '100vw',
-          maxHeight: '100vh',
-          width: 'auto',
-          height: 'auto',
-          objectFit: 'contain',
-          objectPosition: 'center',
-          userSelect: 'none',
-          WebkitUserDrag: 'none',
-          display: 'block',
+          width: '100vw',
+          height: '100vh',
+          minHeight: 0,
+          minWidth: 0,
+          background: '#111',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
           margin: 0,
-          background: 'transparent',
-          boxShadow: 'none',
+          padding: 0,
+          position: 'fixed',
+          inset: 0,
+          zIndex: 0,
+          touchAction: 'pan-y',
         }}
-        draggable={false}
-      />
-    </div>
+        tabIndex={0}
+      >
+        <div style={{
+          position: 'absolute',
+          top: 32,
+          left: 0,
+          width: '100%',
+          textAlign: 'center',
+          zIndex: 2,
+          pointerEvents: 'none',
+        }}>
+          <span style={{
+            fontFamily: 'Playfair Display, serif',
+            fontWeight: 700,
+            fontSize: '2.7rem',
+            color: '#fff',
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            textShadow: '0 2px 12px #000',
+            lineHeight: 1.1,
+            userSelect: 'none',
+          }}>
+            NYC
+          </span>
+        </div>
+        <img
+          src={mediaItems[current].url}
+          alt=""
+          style={{
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            width: 'auto',
+            height: 'auto',
+            objectFit: 'contain',
+            objectPosition: 'center',
+            userSelect: 'none',
+            WebkitUserDrag: 'none',
+            display: 'block',
+            margin: 0,
+            background: 'transparent',
+            boxShadow: 'none',
+          }}
+          draggable={false}
+        />
+      </div>
+    </>
   );
 }
