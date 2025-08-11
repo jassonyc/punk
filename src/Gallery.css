@@ -1,0 +1,31 @@
+.my-masonry-grid {
+  display: flex;
+  margin-left: -20px;
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 20px;
+  background-clip: padding-box;
+}
+.my-masonry-grid img {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  margin-bottom: 20px;
+  border: 1.5px solid #d4af37;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  cursor: zoom-in;
+}
+.my-masonry-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+  opacity: 0.92;
+}
+@media (max-width: 700px) {
+  .my-masonry-grid {
+    margin-left: -8px;
+  }
+  .my-masonry-grid_column {
+    padding-left: 8px;
+  }
+}
