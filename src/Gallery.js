@@ -38,12 +38,12 @@ export default function Gallery() {
     };
     node.addEventListener('touchend', onTap);
 
-    // Avance aleatorio automático cada 5s si no hay interacción
+    // Avance aleatorio automático cada 12s si no hay interacción
     autoAdvance = setInterval(() => {
-      if (Date.now() - lastTap > 4000) {
+      if (Date.now() - lastTap > 11000) {
         setCurrent(() => Math.floor(Math.random() * mediaItems.length));
       }
-    }, 5000);
+    }, 12000);
 
     return () => {
       node.removeEventListener('touchend', onTap);
