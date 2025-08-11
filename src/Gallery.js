@@ -97,7 +97,7 @@ export default function Gallery() {
             lineHeight: 1.1,
             userSelect: 'none',
           }}>
-            NYC
+            jassonyc
           </span>
         </div>
         <img
