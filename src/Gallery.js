@@ -77,6 +77,32 @@ export default function Gallery() {
         }}
         tabIndex={0}
       >
+          <a
+            href="/contacto"
+            style={{
+              position: 'absolute',
+              top: 36,
+              right: 36,
+              fontFamily: 'Playfair Display, serif',
+              fontWeight: 700,
+              fontSize: '1.1rem',
+              color: '#fff',
+              letterSpacing: '0.08em',
+              textDecoration: 'underline',
+              background: 'rgba(0,0,0,0.18)',
+              padding: '2px 10px',
+              borderRadius: 6,
+              zIndex: 3,
+              pointerEvents: 'auto',
+              userSelect: 'auto',
+              transition: 'background 0.2s',
+            }}
+            onMouseOver={e => e.currentTarget.style.background = 'rgba(0,0,0,0.38)'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(0,0,0,0.18)'}
+          >
+            contacto
+          </a>
+        {/* Título y enlace de contacto */}
         <div style={{
           position: 'absolute',
           top: 32,
@@ -100,6 +126,31 @@ export default function Gallery() {
             jassonyc
           </span>
         </div>
+        <a
+          href="/contacto"
+          style={{
+            position: 'absolute',
+            top: 36,
+            right: 36,
+            fontFamily: 'Playfair Display, serif',
+            fontWeight: 700,
+            fontSize: '1.1rem',
+            color: '#fff',
+            letterSpacing: '0.08em',
+            textDecoration: 'underline',
+            background: 'rgba(0,0,0,0.18)',
+            padding: '2px 10px',
+            borderRadius: 6,
+            zIndex: 3,
+            pointerEvents: 'auto',
+            userSelect: 'auto',
+            transition: 'background 0.2s',
+          }}
+          onMouseOver={e => e.currentTarget.style.background = 'rgba(0,0,0,0.38)'}
+          onMouseOut={e => e.currentTarget.style.background = 'rgba(0,0,0,0.18)'}
+        >
+          contacto
+        </a>
         <img
           src={mediaItems[current].url}
           alt=""
