@@ -97,20 +97,40 @@ export default function Gallery() {
           GALLERY
         </span>
       </div>
-      <img
-        src={mediaItems[current].url}
-        alt=""
+      <div
         style={{
           width: '100vw',
           height: '100vh',
-          objectFit: 'cover',
-          objectPosition: 'center',
-          userSelect: 'none',
-          WebkitUserDrag: 'none',
-          transition: 'transform 0.5s cubic-bezier(.4,0,.2,1)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: 1,
+          background: '#000',
         }}
-        draggable={false}
-      />
+      >
+        <img
+          src={mediaItems[current].url}
+          alt=""
+          style={{
+            width: '100%',
+            height: '100%',
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            objectFit: 'contain',
+            objectPosition: 'center',
+            userSelect: 'none',
+            WebkitUserDrag: 'none',
+            transition: 'transform 0.5s cubic-bezier(.4,0,.2,1)',
+            display: 'block',
+            margin: 'auto',
+            background: '#000',
+          }}
+          draggable={false}
+        />
+      </div>
     </div>
   );
 }
