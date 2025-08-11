@@ -103,7 +103,7 @@ export default function Gallery() {
           </span>
         </div>
         <a
-          href="/contacto"
+          href="/contacto.html"
           style={{
             position: 'absolute',
             top: 36,
