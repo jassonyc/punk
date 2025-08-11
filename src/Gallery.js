@@ -23,36 +23,31 @@ export default function Gallery() {
     return () => node && node.removeEventListener('wheel', handleWheel);
   }, []);
 
-  // Navegación por swipe (móvil)
+  // Navegación por tap (móvil) y avance aleatorio automático
   useEffect(() => {
-    let startX = 0;
-    let startY = 0;
-    let isTouch = false;
     const node = mainRef.current;
     if (!node) return;
-    const onTouchStart = (e) => {
-      isTouch = true;
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
+    let lastTap = 0;
+    let autoAdvance;
+
+    // Tap para avanzar
+    const onTap = (e) => {
+      if (e.touches && e.touches.length > 1) return; // Ignorar multitouch
+      setCurrent((prev) => (prev === mediaItems.length - 1 ? 0 : prev + 1));
+      lastTap = Date.now();
     };
-    const onTouchEnd = (e) => {
-      if (!isTouch) return;
-      const dx = e.changedTouches[0].clientX - startX;
-      const dy = e.changedTouches[0].clientY - startY;
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-        if (dx < 0) setCurrent((prev) => (prev === mediaItems.length - 1 ? 0 : prev + 1));
-        else setCurrent((prev) => (prev === 0 ? mediaItems.length - 1 : prev - 1));
-      } else if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 40) {
-        if (dy > 0) setCurrent((prev) => (prev === 0 ? mediaItems.length - 1 : prev - 1));
-        else setCurrent((prev) => (prev === mediaItems.length - 1 ? 0 : prev + 1));
+    node.addEventListener('touchend', onTap);
+
+    // Avance aleatorio automático cada 5s si no hay interacción
+    autoAdvance = setInterval(() => {
+      if (Date.now() - lastTap > 4000) {
+        setCurrent(() => Math.floor(Math.random() * mediaItems.length));
       }
-      isTouch = false;
-    };
-    node.addEventListener('touchstart', onTouchStart);
-    node.addEventListener('touchend', onTouchEnd);
+    }, 5000);
+
     return () => {
-      node.removeEventListener('touchstart', onTouchStart);
-      node.removeEventListener('touchend', onTouchEnd);
+      node.removeEventListener('touchend', onTap);
+      clearInterval(autoAdvance);
     };
   }, []);
 
@@ -62,13 +57,19 @@ export default function Gallery() {
       style={{
         width: '100vw',
         height: '100vh',
-        background: '#000',
+        minHeight: 0,
+        minWidth: 0,
+        background: '#111',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        position: 'relative',
+        margin: 0,
+        padding: 0,
+        position: 'fixed',
+        inset: 0,
+        zIndex: 0,
         touchAction: 'pan-y',
       }}
       tabIndex={0}
@@ -83,49 +84,39 @@ export default function Gallery() {
         pointerEvents: 'none',
       }}>
         <span style={{
-          fontFamily: 'Georgia, serif',
-          fontWeight: 'bold',
-          fontSize: '2.5rem',
-          color: '#fff',
-          letterSpacing: '0.2em',
-          background: 'rgba(0,0,0,0.18)',
-          padding: '0.2em 1.2em',
-          borderRadius: 12,
+          fontFamily: 'Permanent Marker, cursive',
+          fontWeight: 'normal',
+          fontSize: '2.7rem',
+          color: '#e10613',
+          letterSpacing: '0.08em',
           textTransform: 'uppercase',
-          boxShadow: '0 2px 12px rgba(0,0,0,0.18)',
+          textShadow: '0 2px 8px #a00, 0 6px 18px #000',
+          filter: 'drop-shadow(0 6px 2px #a00)',
+          lineHeight: 1.1,
+          userSelect: 'none',
         }}>
           GALLERY
         </span>
       </div>
-      <div
+      <img
+        src={mediaItems[current].url}
+        alt=""
         style={{
-          flex: 1,
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#000',
+          maxWidth: '100vw',
+          maxHeight: '100vh',
+          width: 'auto',
+          height: 'auto',
+          objectFit: 'contain',
+          objectPosition: 'center',
+          userSelect: 'none',
+          WebkitUserDrag: 'none',
+          display: 'block',
+          margin: 0,
+          background: 'transparent',
+          boxShadow: 'none',
         }}
-      >
-        <img
-          src={mediaItems[current].url}
-          alt=""
-          style={{
-            maxWidth: '100vw',
-            maxHeight: '100vh',
-            objectFit: 'contain',
-            objectPosition: 'center',
-            userSelect: 'none',
-            WebkitUserDrag: 'none',
-            transition: 'transform 0.5s cubic-bezier(.4,0,.2,1)',
-            display: 'block',
-            margin: 'auto',
-            background: '#000',
-          }}
-          draggable={false}
-        />
-      </div>
+        draggable={false}
+      />
     </div>
   );
 }
