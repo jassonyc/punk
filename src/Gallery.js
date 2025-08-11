@@ -84,14 +84,13 @@ export default function Gallery() {
         pointerEvents: 'none',
       }}>
         <span style={{
-          fontFamily: 'Permanent Marker, cursive',
-          fontWeight: 'normal',
+          fontFamily: 'Playfair Display, serif',
+          fontWeight: 700,
           fontSize: '2.7rem',
-          color: '#e10613',
-          letterSpacing: '0.08em',
+          color: '#fff',
+          letterSpacing: '0.12em',
           textTransform: 'uppercase',
-          textShadow: '0 2px 8px #a00, 0 6px 18px #000',
-          filter: 'drop-shadow(0 6px 2px #a00)',
+          textShadow: '0 2px 12px #000',
           lineHeight: 1.1,
           userSelect: 'none',
         }}>
