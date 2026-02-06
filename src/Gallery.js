@@ -1,5 +1,6 @@
   import React, { useState, useRef, useEffect } from 'react';
 import { mediaItems } from './data/mediaItems';
+import './Gallery.css';
 
 export default function Gallery() {
   const [current, setCurrent] = useState(0);
@@ -54,10 +55,11 @@ export default function Gallery() {
   }, []);
 
   return (
-    <div ref={mainRef} style={{ width: '100vw', height: '100vh' }}>
+    <div ref={mainRef} className="gallery-container">
       <img
         src={mediaItems[current].url}
         alt=""
+        className="gallery-image"
         draggable={false}
       />
     </div>
