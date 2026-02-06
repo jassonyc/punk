@@ -1,8 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders gallery with centered image', () => {
+  const { container } = render(<App />);
+  const galleryContainer = container.querySelector('.gallery-container');
+  const galleryImage = container.querySelector('.gallery-image');
+  
+  expect(galleryContainer).toBeInTheDocument();
+  expect(galleryImage).toBeInTheDocument();
+  expect(galleryImage).toHaveAttribute('draggable', 'false');
 });
