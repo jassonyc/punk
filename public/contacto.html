@@ -20,7 +20,7 @@
     body{
       min-height:100vh;
       background-color:var(--bg);
-      background-image: url('/images/_DSC6109 copy.jpeg'); /* change filename here if needed */
+      background-image: url('/images/_DSC6109.jpeg'); /* updated filename */
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
@@ -30,7 +30,8 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      overflow:hidden;
+      overflow:auto; /* allow scrolling on small devices */
+      -webkit-overflow-scrolling: touch;
     }
 
     /* Home link (jassonyc) */
@@ -46,10 +47,7 @@
       background:rgba(0,0,0,0.18);
       padding:6px 12px;
       border-radius:6px;
-      transition:background .18s,opacity .18s;
     }
-    .home-link:focus,
-    .home-link:hover{background:rgba(0,0,0,0.32);outline:none}
 
     /* Overlay panel that centers text and ensures readability */
     .panel{
@@ -64,23 +62,7 @@
       box-shadow:0 8px 36px rgba(0,0,0,0.6);
     }
 
-    /* Title as a button (click opens mail client) */
-    .title{
-      display:inline-block;
-      font-size:2.4rem;
-      margin:0 0 1rem;
-      text-transform:uppercase;
-      color:var(--text);
-      background:rgba(0,0,0,0.12);
-      padding:0.45rem 1rem;
-      border-radius:8px;
-      cursor:pointer;
-      border:0;
-      font-weight:700;
-      text-decoration:none;
-    }
-    .title:focus{outline:3px solid rgba(255,255,255,0.14)}
-
+    .title{font-size:2.4rem;margin:0 0 1rem;text-transform:uppercase}
     .subtitle{font-size:1.05rem;margin-bottom:1rem;opacity:0.95}
     .email{display:inline-block;margin-top:1rem;color:var(--text);font-weight:700;text-decoration:underline;padding:4px 8px;border-radius:6px;background:rgba(0,0,0,0.12)}
 
@@ -97,8 +79,7 @@
 
   <!-- Main centered panel (content editable) -->
   <main class="panel" role="main">
-    <!-- Convert title into a real button-like link that opens mail -->
-    <a href="mailto:jassonjfer9@gmail.com" class="title" role="button" aria-label="Enviar correo a jassonjfer9">CONTACTO</a>
+    <h1 class="title">CONTACTO</h1>
     <div class="subtitle">Serigrafía | Diseño | Fotografía<br>Colectivo creativo</div>
     <a class="email" href="mailto:jassonjfer9@gmail.com">📧 jassonjfer9@gmail.com</a>
   </main>
