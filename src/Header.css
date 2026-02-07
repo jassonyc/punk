@@ -56,3 +56,15 @@
   opacity: 0.95;
 }
 
+/* XML button */
+.xml-btn {
+  font-size: 0.9rem;
+  color: #fff;
+  background: rgba(255,255,255,0.07);
+  padding: 8px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.xml-btn:hover { opacity:0.95 }
+

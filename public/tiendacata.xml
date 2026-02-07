@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Imported from WordPress WXR on a local copy by user request -->
+<!-- Placeholder: original file provided by user at /Users/jasson/Downloads/tiendacata.xml -->
+<rss version="2.0">
+  <channel>
+    <title>tiendacata</title>
+    <link>https://catazhohardcore.wordpress.com/</link>
+    <description>Exported content</description>
+    <item>
+      <title>Ejemplo</title>
+      <link>https://catazhohardcore.wordpress.com/ejemplo</link>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 +0000</pubDate>
+      <dc:creator><![CDATA[admin]]></dc:creator>
+      <category><![CDATA[uncategorized]]></category>
+      <guid isPermaLink="false">https://catazhohardcore.wordpress.com/?p=1</guid>
+      <description></description>
+      <content:encoded><![CDATA[<p>Contenido de prueba.</p>]]></content:encoded>
+    </item>
+  </channel>
+</rss>
