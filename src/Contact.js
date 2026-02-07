@@ -8,6 +8,9 @@ export default function Contact() {
   const [status, setStatus] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
+  const MAX_COMMENTS = 30; // keep last 30 comments
+  const MAX_TOTAL_CHARS = 40000; // roughly limit total chars stored
+
   const [commentsList, setCommentsList] = useState(() => {
     try {
       const raw = localStorage.getItem('comments');
@@ -19,13 +22,40 @@ export default function Contact() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('comments', JSON.stringify(commentsList));
+      // Trim if necessary before storing
+      let list = Array.isArray(commentsList) ? commentsList.slice() : [];
+      // enforce max count
+      if (list.length > MAX_COMMENTS) list = list.slice(0, MAX_COMMENTS);
+      // enforce total chars
+      let total = list.reduce((s, it) => s + (it.text || '').length, 0);
+      while (total > MAX_TOTAL_CHARS && list.length > 1) {
+        const removed = list.pop();
+        total -= (removed.text || '').length;
+      }
+      localStorage.setItem('comments', JSON.stringify(list));
+      // sync state if trimmed
+      if (list.length !== commentsList.length) setCommentsList(list);
     } catch (e) {
-      // ignore
+      // ignore storage errors
     }
   }, [commentsList]);
 
   const endpoint = process.env.REACT_APP_COMMENT_ENDPOINT || ''; // set this to your Formspree or webhook URL
+
+  function persistComment(commentObj) {
+    setCommentsList((prev) => {
+      const next = [commentObj, ...prev];
+      // Trim to max count immediately
+      if (next.length > MAX_COMMENTS) next.length = MAX_COMMENTS;
+      // Also trim total chars if somehow exceeded
+      let total = next.reduce((s, it) => s + (it.text || '').length, 0);
+      while (total > MAX_TOTAL_CHARS && next.length > 1) {
+        const rem = next.pop();
+        total -= (rem.text || '').length;
+      }
+      return next;
+    });
+  }
 
   async function handleSubmit() {
     const txt = comment.trim();
@@ -35,7 +65,7 @@ export default function Contact() {
 
     if (!endpoint) {
       // No endpoint configured: local fallback and persist
-      setCommentsList((prev) => [commentObj, ...prev]);
+      persistComment(commentObj);
       alert('Gracias por tu comentario — (anónimo)');
       setComment('');
       return;
@@ -51,7 +81,7 @@ export default function Contact() {
       });
       if (res.ok) {
         setStatus('Gracias — tu comentario fue enviado.');
-        setCommentsList((prev) => [commentObj, ...prev]);
+        persistComment(commentObj);
         setComment('');
       } else {
         const text = await res.text();
@@ -65,6 +95,14 @@ export default function Contact() {
       setSubmitting(false);
       setTimeout(() => setStatus(''), 4500);
     }
+  }
+
+  function clearComments() {
+    if (!confirm('Borrar todos los comentarios locales? Esta acción no se puede deshacer.')) return;
+    try {
+      localStorage.removeItem('comments');
+    } catch (e) {}
+    setCommentsList([]);
   }
 
   return (
@@ -91,7 +129,14 @@ export default function Contact() {
 
         {/* Anonymous comment box */}
         <div className="contact-comments" aria-labelledby="comentarios-title">
-          <h2 id="comentarios-title" style={{marginTop: '1.25rem', marginBottom: '0.5rem', fontSize: '1.05rem'}}>Deja un comentario anónimo</h2>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+            <h2 id="comentarios-title" style={{marginTop: '1.25rem', marginBottom: '0.5rem', fontSize: '1.05rem'}}>Deja un comentario anónimo</h2>
+            <div style={{display:'flex',gap:10}}>
+              <button className="comment-clear" type="button" onClick={clearComments}>Borrar todos</button>
+              <div style={{fontSize:12,opacity:0.9}}>Guardados: {commentsList.length}</div>
+            </div>
+          </div>
+
           <textarea
             className="comment-textarea"
             value={comment}
