@@ -48,11 +48,11 @@
 
 /* Cada imagen de la galería */
 .gallery-image {
-  max-width: 100vw;
-  max-height: 100vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
   object-position: center;
   user-select: none;
   -webkit-user-drag: none;
@@ -73,9 +73,22 @@
 
 .stack-image {
   width: 100vw;
-  height: calc(100vw * 0.66);
+  height: auto;
   object-fit: cover;
   display: block;
+}
+
+/* Desktop: ensure the gallery root shows full-bleed image */
+@media (min-width: 801px) {
+  .gallery-root {
+    align-items: center;
+    justify-content: center;
+  }
+  .gallery-image {
+    max-width: 100vw;
+    max-height: 100vh;
+    object-fit: contain;
+  }
 }
 
 /* Mensaje para orientación en modo retrato */
