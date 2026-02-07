@@ -1,77 +1,11 @@
-
-.App {
-  text-align: center;
-  min-height: 100vh;
-  padding: 20px;
-  color: #222;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #fff;
-  background-attachment: fixed;
-  position: relative;
-}
-
-body {
-  background: #fff;
-  min-height: 100vh;
-}
-
-/* Textura sutil tipo galería */
-
-
-
-.portfolio-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 32px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-
-
-.media-card {
-  background: transparent;
-  border: none;
-  box-shadow: none;
+/* Ocupa toda la ventana y quita márgenes */
+html, body, #root {
+  margin: 0;
   padding: 0;
-  width: 420px;
-  color: #eee;
-  overflow: visible;
-  margin-bottom: 32px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: none;
-}
-
-.media-card:hover {
-  box-shadow: none;
-  transform: none;
-}
-
-
-
-.media-card img,
-.media-card video {
   width: 100%;
-  height: 420px;
-  object-fit: contain;
-  background: #000;
-  border-radius: 0;
-  box-shadow: none;
-  margin-bottom: 18px;
-  display: block;
-  border: none;
+  height: 100%;
+  overflow: hidden; /* Evita scroll */
+  font-family: 'Segoe UI', sans-serif;
+  background: #000; /* Fondo negro */
 }
 
-
-.media-card h3 {
-  display: none;
-}
-
-
-.media-card p {
-  display: none;
-}

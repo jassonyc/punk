@@ -1,5 +1,18 @@
-body {
+/* ==============================
+   index.css - Estilos globales
+   ============================== */
+
+/* Reinicia márgenes y padding, asegura que html y body ocupen toda la pantalla */
+html, body {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Evita scroll */
+}
+
+/* Fuente y suavizado */
+body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -7,7 +20,31 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Código, solo si lo necesitas en la app */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Asegura que #root ocupe toda la pantalla */
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==============================
+   Gallery Image Styles
+   ============================== */
+
+/* Este estilo se puede usar para todas las imágenes de la galería */
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ajusta la imagen sin recortarla */
+  display: block;
+  margin: 0 auto;
+  position: absolute; /* Para que siempre esté centrada */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centra vertical y horizontal */
 }

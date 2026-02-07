@@ -1,1 +1,77 @@
+/* ==============================
+   Gallery.css - Estilos de la galería
+   ============================== */
 
+/* Contenedor principal de la galería */
+.gallery-root {
+  width: 100vw;
+  height: 100vh;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Título de la galería */
+.gallery-title {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: #fff;
+  z-index: 3;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+/* Enlace de contacto */
+.contact-link {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  z-index: 3;
+  text-decoration: underline;
+  background: rgba(0,0,0,0.18);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* Cada imagen de la galería */
+.gallery-image {
+  max-width: 100vw;
+  max-height: 100vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  z-index: 2;
+}
+
+/* Mensaje para orientación en modo retrato */
+@media (orientation: portrait) {
+  .gallery-root::after {
+    content: "Gira tu dispositivo para una mejor experiencia";
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    opacity: 0.9;
+    z-index: 4;
+    background: rgba(0,0,0,0.28);
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+}

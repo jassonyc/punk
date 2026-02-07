@@ -1,15 +1,19 @@
-
-
-
+// src/App.js
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Gallery from './Gallery';
-import './App.css';
+import Header from './Header';
+import Contact from './Contact'; // ← Este será tu componente de contacto
 
 function App() {
   return (
-    <div className="App" style={{ minHeight: '100vh', background: '#fafafa' }}>
-      <Gallery />
-    </div>
+    <Router>
+      <Header /> {/* Siempre visible */}
+      <Routes>
+        <Route path="/" element={<Gallery />} /> {/* Página principal */}
+        <Route path="/contact" element={<Contact />} /> {/* Página de contacto */}
+      </Routes>
+    </Router>
   );
 }
 

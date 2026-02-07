@@ -1,0 +1,30 @@
+.contact-page {
+  width: 100vw;
+  height: 100vh;
+  background: #111;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.contact-content {
+  font-size: 1.2rem;
+  max-width: 480px;
+}
+
+.contact-email {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 700;
+  margin-top: 1rem;
+  display: inline-block;
+}

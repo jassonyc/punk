@@ -1,0 +1,41 @@
+/* Barra superior fija */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  display: flex;
+  justify-content: space-between; /* Logo al centro y botón a la derecha */
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000; /* Que esté siempre encima de la galería */
+  background: rgba(0,0,0,0.3); /* Fondo semitransparente */
+}
+
+/* Título centrado */
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.1em;
+}
+
+/* Botón de contacto */
+.contact-btn {
+  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(0,0,0,0.2);
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.contact-btn:hover {
+  background: rgba(0,0,0,0.4);
+}
+
