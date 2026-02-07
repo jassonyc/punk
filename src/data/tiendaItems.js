@@ -1,0 +1,12 @@
+// auto-generated from public/tiendacata.xml
+export const tiendaItems = [
+  {
+    "title": "Ejemplo",
+    "link": "https://catazhohardcore.wordpress.com/ejemplo",
+    "date": "Sat, 07 Feb 2026 00:00:00 +0000",
+    "content": "<p>Contenido de prueba.</p>",
+    "categories": [
+      "uncategorized"
+    ]
+  }
+];
