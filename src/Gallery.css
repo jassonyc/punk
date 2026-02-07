@@ -59,6 +59,25 @@
   z-index: 2;
 }
 
+/* Estilos para la galería apilada en teléfonos */
+.gallery-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+  background: #000;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.stack-image {
+  width: 100vw;
+  height: calc(100vw * 0.66);
+  object-fit: cover;
+  display: block;
+}
+
 /* Mensaje para orientación en modo retrato */
 @media (orientation: portrait) {
   .gallery-root::after {

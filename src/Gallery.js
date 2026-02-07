@@ -5,17 +5,35 @@ import './Gallery.css';
 
 export default function Gallery() {
   const [current, setCurrent] = useState(0);
+  const [isStacked, setIsStacked] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(max-width: 800px), (orientation: portrait)').matches;
+  });
   const mainRef = useRef(null);
   const touchStartX = useRef(null);
 
-  // Focus container so keyboard works
+  // Watch for viewport changes to toggle stacked mode
   useEffect(() => {
-    const node = mainRef.current;
-    if (node) node.focus();
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(max-width: 800px), (orientation: portrait)');
+    const onChange = () => setIsStacked(mq.matches);
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    else mq.addListener(onChange);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', onChange);
+      else mq.removeListener(onChange);
+    };
   }, []);
 
-  // Wheel navigation (desktop)
+  // Focus container so keyboard works (only when not stacked)
   useEffect(() => {
+    const node = mainRef.current;
+    if (node && !isStacked) node.focus();
+  }, [isStacked]);
+
+  // Wheel navigation (desktop) - skip in stacked mode
+  useEffect(() => {
+    if (isStacked) return;
     const handleWheel = (e) => {
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
         e.preventDefault();
@@ -29,10 +47,11 @@ export default function Gallery() {
     const node = mainRef.current;
     if (node) node.addEventListener('wheel', handleWheel, { passive: false });
     return () => node && node.removeEventListener('wheel', handleWheel);
-  }, []);
+  }, [isStacked]);
 
-  // Tap for mobile advance and auto-random advance
+  // Tap for mobile advance and auto-random advance (only when not stacked)
   useEffect(() => {
+    if (isStacked) return;
     const node = mainRef.current;
     if (!node) return;
     let lastTap = 0;
@@ -56,10 +75,11 @@ export default function Gallery() {
       node.removeEventListener('touchend', onTap);
       clearInterval(autoAdvance);
     };
-  }, []);
+  }, [isStacked]);
 
-  // Keyboard navigation and swipe handlers
+  // Keyboard navigation and swipe handlers (skip in stacked)
   useEffect(() => {
+    if (isStacked) return;
     const node = mainRef.current;
     if (!node) return;
 
@@ -102,14 +122,25 @@ export default function Gallery() {
       node.removeEventListener('touchstart', onTouchStart);
       node.removeEventListener('touchend', onTouchEnd);
     };
-  }, []);
+  }, [isStacked]);
 
-  // Preload next image for smoother transitions
+  // Preload next image for smoother transitions (still useful)
   useEffect(() => {
     const next = (current + 1) % mediaItems.length;
     const img = new Image();
     img.src = mediaItems[next].url;
   }, [current]);
+
+  if (isStacked) {
+    // stacked vertical layout for phones: render all images in a vertical flow
+    return (
+      <div ref={mainRef} className="gallery-stack" aria-label="Galería en modo apilado">
+        {mediaItems.map((m, i) => (
+          <img key={i} className="stack-image" src={m.url} alt={m.alt || ''} loading={i === 0 ? 'eager' : 'lazy'} />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -119,7 +150,6 @@ export default function Gallery() {
       aria-roledescription="image gallery"
       aria-label={`Galería - imagen ${current + 1} de ${mediaItems.length}`}
     >
-      {/* Gallery: only the fullscreen image. Header provides site navigation. */}
       <img
         className="gallery-image"
         src={mediaItems[current].url}
