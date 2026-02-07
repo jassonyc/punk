@@ -47,6 +47,25 @@
 .contact-home.plain {
   right: auto;
   left: 18px; /* plain link moved to the left */
+  top: 18px;
+}
+
+/* On larger screens the header already provides navigation — hide the extra plain link to avoid overlap */
+@media (min-width: 720px) {
+  .contact-home.plain {
+    display: none;
+  }
+  /* ensure primary contact-home stays visible and not overlapped */
+  .contact-home {
+    top: 18px;
+  }
+}
+
+/* On very small screens, stack links to avoid overlap */
+@media (max-width: 420px) {
+  .contact-home.plain {
+    top: 56px; /* push the plain link below the primary one */
+  }
 }
 
 .contact-panel {
