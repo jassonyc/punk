@@ -1,0 +1,44 @@
+{
+  "p-01": {
+    "jpg480": "/images/shop/p-01-480.jpg",
+    "webp480": "/images/shop/p-01-480.webp",
+    "jpg1024": "/images/shop/p-01-1024.jpg",
+    "webp1024": "/images/shop/p-01-1024.webp",
+    "thumb": "/images/shop/p-01-thumb.jpg"
+  },
+  "p-02": {
+    "jpg480": "/images/shop/p-02-480.jpg",
+    "webp480": "/images/shop/p-02-480.webp",
+    "jpg1024": "/images/shop/p-02-1024.jpg",
+    "webp1024": "/images/shop/p-02-1024.webp",
+    "thumb": "/images/shop/p-02-thumb.jpg"
+  },
+  "p-03": {
+    "jpg480": "/images/shop/p-03-480.jpg",
+    "webp480": "/images/shop/p-03-480.webp",
+    "jpg1024": "/images/shop/p-03-1024.jpg",
+    "webp1024": "/images/shop/p-03-1024.webp",
+    "thumb": "/images/shop/p-03-thumb.jpg"
+  },
+  "c-01-after": {
+    "jpg480": "/images/shop/c-01-after-480.jpg",
+    "webp480": "/images/shop/c-01-after-480.webp",
+    "jpg1024": "/images/shop/c-01-after-1024.jpg",
+    "webp1024": "/images/shop/c-01-after-1024.webp",
+    "thumb": "/images/shop/c-01-after-thumb.jpg"
+  },
+  "c-02-after": {
+    "jpg480": "/images/shop/c-02-after-480.jpg",
+    "webp480": "/images/shop/c-02-after-480.webp",
+    "jpg1024": "/images/shop/c-02-after-1024.jpg",
+    "webp1024": "/images/shop/c-02-after-1024.webp",
+    "thumb": "/images/shop/c-02-after-thumb.jpg"
+  },
+  "c-03-after": {
+    "jpg480": "/images/shop/c-03-after-480.jpg",
+    "webp480": "/images/shop/c-03-after-480.webp",
+    "jpg1024": "/images/shop/c-03-after-1024.jpg",
+    "webp1024": "/images/shop/c-03-after-1024.webp",
+    "thumb": "/images/shop/c-03-after-thumb.jpg"
+  }
+}
