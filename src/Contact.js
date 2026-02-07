@@ -9,13 +9,13 @@ export default function Contact() {
       className="contact-page"
       role="main"
       style={{
-        backgroundImage: "url('/images/_DSC6109.jpeg')",
+        backgroundImage: "url('/images/_DSC0042.jpg')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
       {/* Background image fallback (ensures image loads even if CSS background fails) */}
-      <img className="contact-bg" src="/images/_DSC6109.jpeg" alt="Workshop press" />
+      <img className="contact-bg" src="/images/_DSC0042.jpg" alt="Workshop press" />
 
       {/* Home links: react-router Link and plain anchor for static pages */}
       <Link to="/" className="contact-home" aria-label="Volver al inicio">jassonyc</Link>
