@@ -5,6 +5,16 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> <!-- Favicon -->
     <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsivo -->
     <meta name="theme-color" content="#000000" /> <!-- Color barra móvil -->
+
+    <!-- Preconnect to Google Fonts for faster font fetch -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Load Playfair Display with swap to avoid FOIT -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Preload hero/contact image and first gallery image to improve LCP -->
+    <link rel="preload" as="image" href="/images/_DSC0042.jpg">
+
     <title>jassonyc — Fotografía, Serigrafía y Diseño</title> <!-- Nombre de la web -->
   </head>
   <body>
