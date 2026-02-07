@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Imported from WordPress WXR on a local copy by user request -->
 <!-- Placeholder: original file provided by user at /Users/jasson/Downloads/tiendacata.xml -->
-<rss version="2.0">
+<rss version="2.0"
+     xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:wp="http://wordpress.org/export/1.2/">
   <channel>
     <title>tiendacata</title>
     <link>https://catazhohardcore.wordpress.com/</link>
