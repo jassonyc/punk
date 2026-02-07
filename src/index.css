@@ -8,7 +8,13 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Evita scroll */
+  overflow: hidden; /* Evita scroll por defecto */
+}
+
+/* Cuando la app necesita permitir scroll (modo móvil apilado) añadimos la clase allow-scroll */
+html.allow-scroll, body.allow-scroll {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Fuente y suavizado */

@@ -6,7 +6,6 @@
 .contact-page {
   min-height: 100vh;
   background-color: #111;
-  background-image: url('/images/_DSC6109.jpeg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -20,7 +19,7 @@
   position: relative;
 }
 
-/* fallback image in DOM for cases when CSS fails or static HTML usage */
+/* fallback image in DOM for cases when CSS background resolution fails */
 .contact-bg {
   position: absolute;
   inset: 0;
@@ -28,7 +27,7 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  opacity: 0.02;
+  opacity: 1;
 }
 
 .contact-home {

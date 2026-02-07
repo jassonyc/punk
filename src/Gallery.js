@@ -25,6 +25,22 @@ export default function Gallery() {
     };
   }, []);
 
+  // When stacked (mobile) mode is active enable body scrolling by adding a class
+  useEffect(() => {
+    const cls = 'allow-scroll';
+    if (isStacked) {
+      document.documentElement.classList.add(cls);
+      document.body.classList.add(cls);
+    } else {
+      document.documentElement.classList.remove(cls);
+      document.body.classList.remove(cls);
+    }
+    return () => {
+      document.documentElement.classList.remove(cls);
+      document.body.classList.remove(cls);
+    };
+  }, [isStacked]);
+
   // Focus container so keyboard works (only when not stacked)
   useEffect(() => {
     const node = mainRef.current;
