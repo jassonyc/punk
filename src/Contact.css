@@ -32,7 +32,7 @@
 
 .contact-home {
   position: fixed;
-  left: 18px;
+  right: 18px; /* moved to the right */
   top: 18px;
   z-index: 30;
   color: var(--text);
@@ -44,8 +44,8 @@
 }
 
 .contact-home.plain {
-  left: auto;
-  right: 18px;
+  right: auto;
+  left: 18px; /* plain link moved to the left */
 }
 
 .contact-panel {
