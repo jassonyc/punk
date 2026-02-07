@@ -5,12 +5,46 @@ import './Contact.css';
 
 export default function Contact() {
   const [comment, setComment] = useState('');
+  const [status, setStatus] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit() {
+  const endpoint = process.env.REACT_APP_COMMENT_ENDPOINT || ''; // set this to your Formspree or webhook URL
+
+  async function handleSubmit() {
     const txt = comment.trim();
     if (!txt) return alert('Escribe algo antes de enviar.');
-    alert('Gracias por tu comentario — (anónimo)');
-    setComment('');
+
+    if (!endpoint) {
+      // No endpoint configured: local fallback
+      alert('Gracias por tu comentario — (anónimo)');
+      setComment('');
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+      setStatus('');
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ comment: txt }),
+      });
+      if (res.ok) {
+        setStatus('Gracias — tu comentario fue enviado.');
+        setComment('');
+      } else {
+        const text = await res.text();
+        setStatus('Error enviando comentario');
+        console.error('Comment submit error:', res.status, text);
+      }
+    } catch (err) {
+      setStatus('Error de red al enviar comentario');
+      console.error('Comment submit exception:', err);
+    } finally {
+      setSubmitting(false);
+      // clear feedback after a short time
+      setTimeout(() => setStatus(''), 4500);
+    }
   }
 
   return (
@@ -44,10 +78,17 @@ export default function Contact() {
             onChange={(e) => setComment(e.target.value)}
             placeholder="Escribe tu opinión rápidamente... (anónimo)"
             aria-label="Comentario anónimo"
+            disabled={submitting}
           />
           <div className="comment-controls">
-            <button type="button" className="comment-btn" onClick={handleSubmit}>Enviar</button>
+            <button type="button" className="comment-btn" onClick={handleSubmit} disabled={submitting}>
+              {submitting ? 'Enviando…' : 'Enviar'}
+            </button>
           </div>
+          {status && <div style={{marginTop:8,fontSize:14,color:'#fff',opacity:0.9}}>{status}</div>}
+          {!endpoint && (
+            <div style={{marginTop:8,fontSize:12,color:'#ccc'}}>Para recibir mensajes reales configura REACT_APP_COMMENT_ENDPOINT (Formspree o webhook).</div>
+          )}
         </div>
       </div>
     </div>
