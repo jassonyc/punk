@@ -72,7 +72,8 @@ export default function Contact() {
   }
 
   function clearComments() {
-    if (!confirm('Borrar todos los comentarios locales? Esta acción no se puede deshacer.')) return;
+    // use window.confirm to avoid ESLint "no-restricted-globals" rule
+    if (!window.confirm('Borrar todos los comentarios locales? Esta acción no se puede deshacer.')) return;
     try {
       localStorage.removeItem('comments');
     } catch (e) {}
