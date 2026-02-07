@@ -40,7 +40,8 @@ export default function Contact() {
     }
   }, [commentsList]);
 
-  const endpoint = process.env.REACT_APP_COMMENT_ENDPOINT || ''; // set this to your Formspree or webhook URL
+  // No remote endpoint: comments are stored locally in the browser
+  // If you later want remote delivery, re-add REACT_APP_COMMENT_ENDPOINT and the network logic.
 
   function persistComment(commentObj) {
     setCommentsList((prev) => {
@@ -57,44 +58,17 @@ export default function Contact() {
     });
   }
 
-  async function handleSubmit() {
+  function handleSubmit() {
     const txt = comment.trim();
     if (!txt) return alert('Escribe algo antes de enviar.');
 
     const commentObj = { text: txt, date: new Date().toISOString() };
-
-    if (!endpoint) {
-      // No endpoint configured: local fallback and persist
-      persistComment(commentObj);
-      alert('Gracias por tu comentario — (anónimo)');
-      setComment('');
-      return;
-    }
-
-    try {
-      setSubmitting(true);
-      setStatus('');
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ comment: txt }),
-      });
-      if (res.ok) {
-        setStatus('Gracias — tu comentario fue enviado.');
-        persistComment(commentObj);
-        setComment('');
-      } else {
-        const text = await res.text();
-        setStatus('Error enviando comentario');
-        console.error('Comment submit error:', res.status, text);
-      }
-    } catch (err) {
-      setStatus('Error de red al enviar comentario');
-      console.error('Comment submit exception:', err);
-    } finally {
-      setSubmitting(false);
-      setTimeout(() => setStatus(''), 4500);
-    }
+    // Always persist locally
+    persistComment(commentObj);
+    setComment('');
+    setStatus('Comentario guardado localmente.');
+    // Clear status after a short delay
+    setTimeout(() => setStatus(''), 3000);
   }
 
   function clearComments() {
@@ -151,9 +125,7 @@ export default function Contact() {
             </button>
           </div>
           {status && <div style={{marginTop:8,fontSize:14,color:'#fff',opacity:0.9}}>{status}</div>}
-          {!endpoint && (
-            <div style={{marginTop:8,fontSize:12,color:'#ccc'}}>Para recibir mensajes reales configura REACT_APP_COMMENT_ENDPOINT (Formspree o webhook).</div>
-          )}
+          {/* Comments are stored locally in the browser. */}
 
           {/* Persisted comments list */}
           {commentsList && commentsList.length > 0 && (
