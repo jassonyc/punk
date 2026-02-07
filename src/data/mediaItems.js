@@ -29,7 +29,6 @@ export const mediaItems = [
   { url: '/images/_DSC4455.jpg', alt: 'Image _DSC4455' },
   { url: '/images/_DSC5084.jpg', alt: 'Image _DSC5084' },
   { url: '/images/_DSC5493.jpg', alt: 'Image _DSC5493' },
-  { url: '/images/_DSC6109.jpeg', alt: 'Workshop press' },
   { url: '/images/_DSC6356.jpg', alt: 'Image _DSC6356' },
   { url: '/images/C3410T01.jpg', alt: 'C3410T01' },
   { url: '/images/DSC00507.jpg', alt: 'DSC00507' },
