@@ -39,3 +39,20 @@
   background: rgba(0,0,0,0.4);
 }
 
+/* Botón de tienda */
+.shop-btn {
+  font-size: 0.95rem;
+  color: #111;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.04);
+  font-weight: 700;
+}
+
+.shop-btn:hover {
+  opacity: 0.95;
+}
+
