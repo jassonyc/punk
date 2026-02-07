@@ -138,6 +138,24 @@
   opacity: 0.95;
 }
 
+.comment-list {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comment-item {
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.comment-item div {
+  color: var(--text);
+}
+
 @media (orientation: portrait) {
   .contact-panel {
     max-width: 92%;

@@ -1,5 +1,5 @@
 // src/Contact.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Contact.css';
 
@@ -8,14 +8,34 @@ export default function Contact() {
   const [status, setStatus] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
+  const [commentsList, setCommentsList] = useState(() => {
+    try {
+      const raw = localStorage.getItem('comments');
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('comments', JSON.stringify(commentsList));
+    } catch (e) {
+      // ignore
+    }
+  }, [commentsList]);
+
   const endpoint = process.env.REACT_APP_COMMENT_ENDPOINT || ''; // set this to your Formspree or webhook URL
 
   async function handleSubmit() {
     const txt = comment.trim();
     if (!txt) return alert('Escribe algo antes de enviar.');
 
+    const commentObj = { text: txt, date: new Date().toISOString() };
+
     if (!endpoint) {
-      // No endpoint configured: local fallback
+      // No endpoint configured: local fallback and persist
+      setCommentsList((prev) => [commentObj, ...prev]);
       alert('Gracias por tu comentario — (anónimo)');
       setComment('');
       return;
@@ -31,6 +51,7 @@ export default function Contact() {
       });
       if (res.ok) {
         setStatus('Gracias — tu comentario fue enviado.');
+        setCommentsList((prev) => [commentObj, ...prev]);
         setComment('');
       } else {
         const text = await res.text();
@@ -42,7 +63,6 @@ export default function Contact() {
       console.error('Comment submit exception:', err);
     } finally {
       setSubmitting(false);
-      // clear feedback after a short time
       setTimeout(() => setStatus(''), 4500);
     }
   }
@@ -88,6 +108,18 @@ export default function Contact() {
           {status && <div style={{marginTop:8,fontSize:14,color:'#fff',opacity:0.9}}>{status}</div>}
           {!endpoint && (
             <div style={{marginTop:8,fontSize:12,color:'#ccc'}}>Para recibir mensajes reales configura REACT_APP_COMMENT_ENDPOINT (Formspree o webhook).</div>
+          )}
+
+          {/* Persisted comments list */}
+          {commentsList && commentsList.length > 0 && (
+            <div className="comment-list" aria-live="polite">
+              {commentsList.map((c, i) => (
+                <div key={i} className="comment-item">
+                  <div style={{opacity:0.85,fontSize:12,marginBottom:6}}>{new Date(c.date).toLocaleString()}</div>
+                  <div>{c.text}</div>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>
