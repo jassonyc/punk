@@ -14,7 +14,19 @@ export default function Contact() {
   const [commentsList, setCommentsList] = useState(() => {
     try {
       const raw = localStorage.getItem('comments');
-      return raw ? JSON.parse(raw) : [];
+      const parsed = raw ? JSON.parse(raw) : [];
+      // Trim helper to ensure we don't load oversized data
+      const trimList = (list) => {
+        const copy = Array.isArray(list) ? list.slice() : [];
+        if (copy.length > MAX_COMMENTS) copy.length = MAX_COMMENTS;
+        let total = copy.reduce((s, it) => s + (it.text || '').length, 0);
+        while (total > MAX_TOTAL_CHARS && copy.length > 1) {
+          const rem = copy.pop();
+          total -= (rem.text || '').length;
+        }
+        return copy;
+      };
+      return trimList(parsed);
     } catch (e) {
       return [];
     }
@@ -22,19 +34,8 @@ export default function Contact() {
 
   useEffect(() => {
     try {
-      // Trim if necessary before storing
-      let list = Array.isArray(commentsList) ? commentsList.slice() : [];
-      // enforce max count
-      if (list.length > MAX_COMMENTS) list = list.slice(0, MAX_COMMENTS);
-      // enforce total chars
-      let total = list.reduce((s, it) => s + (it.text || '').length, 0);
-      while (total > MAX_TOTAL_CHARS && list.length > 1) {
-        const removed = list.pop();
-        total -= (removed.text || '').length;
-      }
-      localStorage.setItem('comments', JSON.stringify(list));
-      // sync state if trimmed
-      if (list.length !== commentsList.length) setCommentsList(list);
+      // Persist current comments list to localStorage (no state mutation here)
+      localStorage.setItem('comments', JSON.stringify(commentsList));
     } catch (e) {
       // ignore storage errors
     }
@@ -60,7 +61,11 @@ export default function Contact() {
 
   function handleSubmit() {
     const txt = comment.trim();
-    if (!txt) return alert('Escribe algo antes de enviar.');
+    if (!txt) {
+      setStatus('Escribe algo antes de enviar.');
+      setTimeout(() => setStatus(''), 2500);
+      return;
+    }
 
     const commentObj = { text: txt, date: new Date().toISOString() };
     // Always persist locally
