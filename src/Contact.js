@@ -5,7 +5,15 @@ import './Contact.css';
 
 export default function Contact() {
   return (
-    <div className="contact-page" role="main">
+    <div
+      className="contact-page"
+      role="main"
+      style={{
+        backgroundImage: "url('/images/_DSC6109.jpeg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
       {/* Background image fallback (ensures image loads even if CSS background fails) */}
       <img className="contact-bg" src="/images/_DSC6109.jpeg" alt="Workshop press" />
 
