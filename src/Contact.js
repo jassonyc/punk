@@ -1,6 +1,5 @@
 // src/Contact.js
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './Contact.css';
 
 export default function Contact() {
@@ -67,13 +66,19 @@ export default function Contact() {
       return;
     }
 
-    const commentObj = { text: txt, date: new Date().toISOString() };
-    // Always persist locally
-    persistComment(commentObj);
-    setComment('');
-    setStatus('Comentario guardado localmente.');
-    // Clear status after a short delay
-    setTimeout(() => setStatus(''), 3000);
+    setSubmitting(true);
+    try {
+      const commentObj = { text: txt, date: new Date().toISOString() };
+      // Always persist locally
+      persistComment(commentObj);
+      setComment('');
+      setStatus('Comentario guardado localmente.');
+      // Clear status after a short delay
+      setTimeout(() => setStatus(''), 3000);
+    } finally {
+      // ensure we always reset submitting state
+      setSubmitting(false);
+    }
   }
 
   function clearComments() {

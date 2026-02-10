@@ -21,14 +21,14 @@ const PRODUCTS = [
   {
     id: 'h-01',
     title: 'Hoodie 01',
-    priceNumber: 50,
+    priceNumber: 60,
     frontId: 'p-01',
     backId: 'c-01-after',
   },
   {
     id: 'h-02',
     title: 'Hoodie 02',
-    priceNumber: 50,
+    priceNumber: 60,
     frontId: 'p-02',
     backId: 'c-02-after',
   },
