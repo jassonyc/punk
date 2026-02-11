@@ -16,21 +16,23 @@ function thumbFor(id) {
   return m?.thumb || null;
 }
 
-// Editable product list (front/back pairs). All price 50 by request.
+// Editable product list (front/back pairs). Use processed IDs from src/data/shopImages.json
 const PRODUCTS = [
   {
     id: 'h-01',
-    title: 'Hoodie 01',
+    title: 'Hoodie Negra',
     priceNumber: 60,
+    // show p-05 as the main/back image (hero)
     frontId: 'p-01',
-    backId: 'c-01-after',
+    backId: 'p-05',
   },
   {
     id: 'h-02',
-    title: 'Hoodie 02',
+    title: 'Hoodie Verde',
     priceNumber: 60,
+    // second product uses p-06 as main/back
     frontId: 'p-02',
-    backId: 'c-02-after',
+    backId: 'p-06',
   },
 ];
 
