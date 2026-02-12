@@ -16,23 +16,21 @@ function thumbFor(id) {
   return m?.thumb || null;
 }
 
-// Editable product list (front/back pairs). Use processed IDs from src/data/shopImages.json
+// Editable product list (front/back pairs). All price 50 by request.
 const PRODUCTS = [
   {
     id: 'h-01',
-    title: 'Hoodie Negra',
+    title: 'Hoodie 01',
     priceNumber: 60,
-    // show p-05 as the main/back image (hero)
     frontId: 'p-01',
-    backId: 'p-05',
+    backId: 'c-01-after',
   },
   {
     id: 'h-02',
-    title: 'Hoodie Verde',
+    title: 'Hoodie 02',
     priceNumber: 60,
-    // second product uses p-06 as main/back
     frontId: 'p-02',
-    backId: 'p-06',
+    backId: 'c-02-after',
   },
 ];
 
@@ -91,10 +89,13 @@ export default function Shop() {
   return (
     <main className="shop-root">
       <header className="shop-hero" style={{ backgroundImage: `url('${srcFor(PRODUCTS[0].backId, 1024) || '/images/shop/c-01-after-1024.jpg'}')` }}>
-        <div className="shop-hero__inner" aria-hidden="true" />
+        <div className="shop-hero__inner" aria-hidden="false">
+          <h1 className="shop-hero__title">CATAZHO HARDCORE</h1>
+          <a className="shop-hero__cta" href="#catalog">SHOP NOW</a>
+        </div>
       </header>
 
-      <section className="shop-grid">
+      <section id="catalog" className="shop-grid">
         {PRODUCTS.map(prod => {
           // show the back image as the main photo, front as the secondary
           const mainImg = srcFor(prod.backId, 1024) || srcFor(prod.backId, 480);
