@@ -16,31 +16,28 @@ function thumbFor(id) {
   return m?.thumb || null;
 }
 
-// Editable product list (front/back pairs). All price 50 by request.
-const PRODUCTS = [
-  {
-    id: 'h-01',
-    title: 'Hoodie 01',
-    priceNumber: 60,
-    frontId: 'p-01',
-    backId: 'c-01-after',
-  },
-  {
-    id: 'h-02',
-    title: 'Hoodie 02',
-    priceNumber: 60,
-    frontId: 'p-02',
-    backId: 'c-02-after',
-  },
-];
+// Editable product list (front/back pairs). Generate one product per image in the mapping, default price 60
+const PRODUCTS = Object.keys(IMAGES).sort().map((imgId, idx) => ({
+  id: `prod-${idx + 1}`,
+  title: `Item ${idx + 1}`,
+  priceNumber: 60,
+  frontId: imgId,
+  backId: imgId,
+}));
 
 function currency(n) { return `USD ${n}`; }
+
+// Effective price logic: default 60, but any product whose title contains "tshith" costs 30
+function effectivePrice(product) {
+  if (!product) return 60;
+  if (/tshith/i.test(product.title || '')) return 30;
+  return product.priceNumber ?? 60;
+}
 
 export default function Shop() {
   const [cart, setCart] = useState(() => {
     try { return JSON.parse(localStorage.getItem('shop_cart')) || []; } catch { return []; }
   });
-  const [modal, setModal] = useState(null); // { product, view: 'front'|'back' }
   const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
@@ -65,7 +62,7 @@ export default function Shop() {
     setCart(prev => {
       const found = prev.find(p => p.id === product.id);
       if (found) return prev.map(p => p.id === product.id ? { ...p, qty: p.qty + qty } : p);
-      return [...prev, { id: product.id, title: product.title, priceNumber: product.priceNumber, qty }];
+      return [...prev, { id: product.id, title: product.title, priceNumber: effectivePrice(product), qty }];
     });
     setShowCart(true);
   }
@@ -88,8 +85,11 @@ export default function Shop() {
 
   return (
     <main className="shop-root">
-      {/* Shop page: catalog only. Hero moved to Home. */}
-      <section id="catalog" className="shop-grid">
+      <header className="shop-hero" style={{ backgroundImage: `url('${srcFor(PRODUCTS[0].backId, 1024) || '/images/shop/c-01-after-1024.jpg'}')` }}>
+        <div className="shop-hero__inner" aria-hidden="true" />
+      </header>
+
+      <section className="shop-grid">
         {PRODUCTS.map(prod => {
           // show the back image as the main photo, front as the secondary
           const mainImg = srcFor(prod.backId, 1024) || srcFor(prod.backId, 480);
@@ -99,47 +99,20 @@ export default function Shop() {
           return (
             <article key={prod.id} className="card">
               <div className="card-media">
-                <img src={mainImg} alt={`${prod.title} back`} className="card-media__main"/>
-                <button className="card-media__view" onClick={() => setModal({ product: prod, view: 'back' })}>Ver</button>
+                <img src={mainImg} alt={`${prod.title}`} className="card-media__main"/>
               </div>
               <div className="card-info">
                 <div className="card-title">{prod.title}</div>
-                <div className="card-price">{currency(prod.priceNumber)}</div>
+                <div className="card-price">{currency(effectivePrice(prod))}</div>
                 <div className="card-actions">
                   <button className="shop-btn shop-btn--small" onClick={() => addToCart(prod)}>Agregar</button>
-                  <button className="shop-btn shop-btn--ghost" onClick={() => setModal({ product: prod, view: 'back' })}>Abrir</button>
                 </div>
-                <div className="card-thumbs">
-                  <img src={thumbMain} alt="back thumb" />
-                  <img src={thumbAlt} alt="front thumb" />
-                </div>
+                {/* thumbs removed: only one image per product */}
               </div>
             </article>
           );
         })}
       </section>
-
-      {/* Modal */}
-      {modal && (
-        <div className="shop-modal" role="dialog" aria-modal="true" onClick={() => setModal(null)}>
-          <div className="shop-modal__inner" onClick={e => e.stopPropagation()}>
-            <button className="shop-modal__close" onClick={() => setModal(null)}>×</button>
-            <div className="shop-modal__images">
-              {/* show back first, then front */}
-              <img src={srcFor(modal.product.backId, 1024)} alt="back" />
-              <img src={srcFor(modal.product.frontId, 1024)} alt="front" />
-            </div>
-            <div className="shop-modal__meta">
-              <h3>{modal.product.title}</h3>
-              <div className="shop-modal__price">{currency(modal.product.priceNumber)}</div>
-              <div style={{display:'flex',gap:8}}>
-                <button className="shop-btn" onClick={() => { addToCart(modal.product); setModal(null); }}>Agregar al carrito</button>
-                <button className="shop-btn shop-btn--ghost" onClick={() => { window.location.href = `mailto:jassonjfer9@gmail.com?subject=Pedido%20${encodeURIComponent(modal.product.title)}`; }}>Pedir por email</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Cart drawer */}
       <aside className={`shop-cart ${showCart ? 'shop-cart--open' : ''}`} aria-hidden={!showCart}>

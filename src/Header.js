@@ -1,23 +1,19 @@
 // src/Header.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // ← Importamos Link
 import './Header.css';
 
 export default function Header() {
   return (
     <header className="header" role="banner">
       <div className="left-group">
-        <Link to="/" className="logo" aria-label="Ir al inicio">CATAZHO HARDCORE</Link>
+        <Link className="nav-btn shop-btn" to="/shop" aria-label="Tienda">Tienda</Link>
       </div>
 
-      <nav className="center-nav" aria-label="Main navigation">
-        <Link className="nav-btn" to="/shop">Shop</Link>
-        <Link className="nav-btn" to="/about">About</Link>
-        <Link className="nav-btn" to="/contact">Contact</Link>
-      </nav>
+      <Link to="/" className="logo" aria-label="Ir al inicio">JASSONYC</Link> {/* Título centrado y clicable */}
 
       <div className="right-group">
-        <Link className="nav-cart" to="/shop" aria-label="Carrito">🛒</Link>
+        <Link className="nav-btn contact-btn" to="/contact" aria-label="Contacto">Contacto</Link>
       </div>
     </header>
   );
